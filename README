@@ -1,0 +1,12 @@
+JavaScript Creole 1.0 Wiki Markup Parser
+
+Creole is a common wiki markup language to be used across different
+wikis. It's not replacing existing markup but instead enabling wiki
+users to transfer content seamlessly across wikis, and for novice
+users to contribute more easily.
+
+Based on Codeholic's Codex.
+http://www.ivan.fomichev.name/2008/04/javascript-creole-10-wiki-markup-parser.html
+
+http://www.wikicreole.org
+http://www.wikicreole.org/attach/CheatSheet/creole_cheat_sheet.html
