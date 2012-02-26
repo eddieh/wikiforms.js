@@ -1,0 +1,318 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+
+  <title>Example</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <style>
+    #main {
+      width: 1000px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    #main h1 {
+      margin-bottom: 4px;
+    }
+    #main h4 {
+      margin: 0;
+    }
+    textarea#source {
+      box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      font-family: monospace;
+      width: 576px;
+    }
+    #toolbar {
+      box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      width: 576px;
+      margin-top:4px;
+      margin-bottom: 4px;
+      padding: 4px;
+      border-top: 2px solid gray;
+      background: rgb(221,	221,	221);
+      border-bottom: 2px solid gray;
+    }
+    button#build {
+    }
+    div#markup-help {
+      float: right;
+    }
+    div#markup-help table {
+      width: 399px;
+      border-bottom: 3px solid #BBB;
+      border-left: 3px solid #999;
+      border-right: 3px solid #BBB;
+      border-top: 3px solid #999;
+      margin-bottom: 0;
+    }
+    div#markup-help td {
+      border: 1px solid #999;
+      border-width: 1px 0;
+      font-size: 80%;
+      margin: 0;
+      padding: 0.2em;
+      vertical-align: middle;
+      white-space: nowrap;
+    }
+    div#markup-help td.syntax, div#markup-help tr > :first-child {
+      padding-left: 4px;
+      font-family: monospace;
+    }
+    div#markup-help td.arrow {
+      color: #666;
+      padding: 0 1em;
+    }
+    table {
+      border: double black;
+      border-collapse: collapse;
+    }
+    div#stage {
+      margin-top: 20px;
+      width: 576px;
+      border: 1px solid gray;
+      background-color: #e8e8e8;
+    }
+    div#generated {
+      padding: 12px;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <div id="container">
+
+    <div id="main" role="main">
+
+      <h1>Wiki Creole Example</h1>
+
+      <div id="markup-help">
+        <h4>Syntax:</h4>
+        <table cellpadding="0" cellspacing="0"><tbody>
+          <tr>
+            <td>//italics//</td>
+            <td class="arrow">&#8594;</td>
+            <td><em>italics</em></td>
+          </tr>
+
+          <tr>
+            <td>**bold**</td>
+            <td class="arrow">&#8594;</td>
+            <td><strong>bold</strong></td>
+          </tr>
+
+          <tr>
+            <td>
+              * Bullet list<br>
+              * Second item<br>
+              ** Sub item
+            </td>
+            <td class="arrow">&#8594;</td>
+            <td>
+              <!-- &#8226; Bullet list<br> -->
+              <!-- &#8226; Second item<br> -->
+              <!-- ..&#8226; Sub item -->
+              <ul>
+                <li>Bullet list</li>
+                <li>Second item</li>
+                <ul>
+                  <li>Sub item</li>
+                </ul>
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              # Numbered list<br>
+              # Second item<br>
+              ## Sub item
+            </td>
+            <td class="arrow">&#8594;</td>
+            <td>
+              <!-- 1. Numbered list<br> -->
+              <!-- 2. Second item<br> -->
+              <!-- 2.1 Sub item -->
+              <ol>
+                <li>Numbered list</li>
+                <li>Second item</li>
+                <ol>
+                  <li>Sub item</li>
+                </ol>
+              </ol>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Link to [[wiki page]]</td>
+            <td class="arrow">&#8594;</td>
+            <td>Link to
+              <a href="http://www.wikicreole.org/attach/CheatSheet/URL">
+                wiki page
+              </a>
+            </td>
+          </tr>
+
+          <tr>
+            <td>[[URL|link name]]</td>
+            <td class="arrow">&#8594;</td>
+            <td>
+              <a href="http://www.wikicreole.org/attach/CheatSheet/URL">
+                link name
+              </a>
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              == Large heading<br>
+              === Medium heading<br>
+              ==== Small heading
+            </td>
+            <td class="arrow">&#8594;</td>
+            <td>
+              <span style="font-size: 130%; font-weight: bold;">
+                Large heading
+              </span><br>
+              <span style="font-size: 115%; font-weight: bold;">
+                Medium heading
+              </span><br>
+              <span style="font-size: 100%; font-weight: bold;">
+                Small heading
+              </span>
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              No<br>
+              linebreak!<br><br>
+              Use empty line
+            </td>
+            <td class="arrow">&#8594;</td>
+            <td>
+              No line break!<br><br>
+              Use empty line
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              Forced\\linebreak<br>
+            </td><td class="arrow">&#8594;</td>
+            <td>
+              Forced<br>
+              line break
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              Horizontal line:<br>
+              ----
+            </td>
+            <td class="arrow">&#8594;</td>
+            <td>
+              Horizontal line:
+              <hr>
+            </td>
+          </tr>
+
+          <tr>
+            <td>{{Image.jpg|title}}</td>
+            <td class="arrow">&#8594;</td>
+            <td>Image with title</td>
+          </tr>
+
+          <tr>
+            <td>
+              |=|=table|=header|<br>
+              |a|table|row|<br>
+              |b|table|row|
+            </td>
+            <td class="arrow">&#8594;</td>
+            <td>Table</td>
+          </tr>
+
+          <tr>
+            <td>
+              {{{<br>
+              == [[Nowiki]]:<br>
+              //**don't** format//<br>
+              }}}
+            </td>
+            <td class="arrow">&#8594;</td>
+            <td>
+              == [[Nowiki]]:<br>
+              //**don't** format//
+            </td>
+          </tr>
+        </tbody></table>
+        <b style="font-size: 70%;">
+          www.wikicreole.org
+        </b>
+      </div>
+
+      <div>
+        <textarea id="source" cols="80" rows="18">
+[[WikiCreole:Creole1.0|{{http://www.wikicreole.org/attach/LeftMenu/viki.png|Creole 1.0}}]]\\
+What you see is a **live** demonstration of [[WikiCreole:Creole1.0|Creole 1.0]] parser, written entirely in [[Wikipedia:JavaScript|JavaScript]]. Creole is a wiki markup language, intended to be a cross standard for various wiki markup dialects.
+
+* Modifying the text in the textarea below results in instant rendering XHTML without page reload.
+* Try it //right now//!
+
+See [[WikiCreole:CheatSheet|Creole 1.0 Cheat Sheet]] for editing tips.
+        </textarea>
+        <div id="toolbar">
+          <button id="build">Build</button>
+        </div>
+      </div>
+
+      <div id="stage">
+        <div id="generated">
+        </div>
+      </div>
+
+    </div>
+
+  </div> <!--! end of #container -->
+
+  <script src="wikicreole.js"></script>
+  <script>
+    function $(id) {
+      return document.getElementById(id);
+    }
+
+    window.onload = function() {
+      var input = $('source');
+      var demo = $('generated');
+
+      var creole = new Parse.Simple.Creole({
+        forIE: document.all,
+        interwiki: {
+          WikiCreole: 'http://www.wikicreole.org/wiki/',
+          Wikipedia: 'http://en.wikipedia.org/wiki/'
+        },
+        linkFormat: ''
+      });
+
+      var render = function() {
+        demo.innerHTML = '';
+        creole.parse(demo, input.value);
+      };
+
+      var button = $('build');
+      button.onclick = function() {
+        render();
+      };
+    }
+  </script>
+
+</body>
+</html>
