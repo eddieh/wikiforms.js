@@ -10,7 +10,7 @@ users to contribute more easily.
 // Assuming #input is a textarea and #output is a div.
 var input = document.getElementById('input');
 var output = document.getElementById('output');
-var creole = new Parse.Simple.Creole({
+var creole = new WikiCreole.Creole({
   forIE: document.all,
   interwiki: {
     WikiCreole: 'http://www.wikicreole.org/wiki/',

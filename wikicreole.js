@@ -31,7 +31,7 @@
  * // Assuming #input is a textarea and #output is a div.
  * var input = document.getElementById('input');
  * var output = document.getElementById('output');
- * var creole = new Parse.Simple.Creole({
+ * var creole = new WikiCreole.Creole({
  *   forIE: document.all,
  *   interwiki: {
  *     WikiCreole: 'http://www.wikicreole.org/wiki/',
@@ -43,15 +43,11 @@
  */
 
 
-if (!Parse) {
-  var Parse = {};
+if (!WikiCreole) {
+  var WikiCreole = {};
 }
 
-if (!Parse.Simple) {
-  Parse.Simple = {};
-}
-
-Parse.Simple.Base = function(grammar, options) {
+WikiCreole.Base = function(grammar, options) {
   if (!arguments.length) {
     return;
   }
@@ -61,7 +57,7 @@ Parse.Simple.Base = function(grammar, options) {
   this.options = options;
 };
 
-Parse.Simple.Base.prototype = {
+WikiCreole.Base.prototype = {
   ruleConstructor: null,
   grammar: null,
   options: null,
@@ -95,9 +91,9 @@ Parse.Simple.Base.prototype = {
   }
 };
 
-Parse.Simple.Base.prototype.constructor = Parse.Simple.Base;
+WikiCreole.Base.prototype.constructor = WikiCreole.Base;
 
-Parse.Simple.Base.Rule = function(params) {
+WikiCreole.Base.Rule = function(params) {
   if (!arguments.length) {
     return;
   }
@@ -111,9 +107,9 @@ Parse.Simple.Base.Rule = function(params) {
   }
 };
 
-Parse.Simple.Base.prototype.ruleConstructor = Parse.Simple.Base.Rule;
+WikiCreole.Base.prototype.ruleConstructor = WikiCreole.Base.Rule;
 
-Parse.Simple.Base.Rule.prototype = {
+WikiCreole.Base.Rule.prototype = {
   regex: null,
   capture: null,
   replaceRegex: null,
@@ -231,9 +227,9 @@ Parse.Simple.Base.Rule.prototype = {
   }
 };
 
-Parse.Simple.Base.Rule.prototype.constructor = Parse.Simple.Base.Rule;
+WikiCreole.Base.Rule.prototype.constructor = WikiCreole.Base.Rule;
 
-Parse.Simple.Creole = function(options) {
+WikiCreole.Creole = function(options) {
   var rx = {};
   rx.link = '[^\\]|~\\n]*(?:(?:\\](?!\\])|~.)[^\\]|~\\n]*)*';
   rx.linkText = '[^\\]~\\n]*(?:(?:\\](?!\\])|~.)[^\\]~\\n]*)*';
@@ -528,9 +524,9 @@ Parse.Simple.Creole = function(options) {
     fallback: { children: [ g.paragraph ] }
   };
 
-  Parse.Simple.Base.call(this, g, options);
+  WikiCreole.Base.call(this, g, options);
 };
 
-Parse.Simple.Creole.prototype = new Parse.Simple.Base();
+WikiCreole.Creole.prototype = new WikiCreole.Base();
 
-Parse.Simple.Creole.prototype.constructor = Parse.Simple.Creole;
+WikiCreole.Creole.prototype.constructor = WikiCreole.Creole;
