@@ -91,7 +91,7 @@
 
     <div id="main" role="main">
 
-      <h1>Wiki Creole Example</h1>
+      <h1>Wiki Forms Example</h1>
 
       <div id="markup-help">
         <h4>Syntax:</h4>
@@ -261,11 +261,13 @@
 
       <div>
         <textarea id="source" cols="80" rows="18">
-[[WikiCreole:Creole1.0|{{http://www.wikicreole.org/attach/LeftMenu/viki.png|Creole 1.0}}]]\\
 What you see is a **live** demonstration of [[WikiCreole:Creole1.0|Creole 1.0]] parser, written entirely in [[Wikipedia:JavaScript|JavaScript]]. Creole is a wiki markup language, intended to be a cross standard for various wiki markup dialects.
 
-* Modifying the text in the textarea below results in instant rendering XHTML without page reload.
-* Try it //right now//!
+@title@
+
+@description|textarea(5,10)@
+
+@occupation|list(Scientist,Engineer,Philosopher)@
 
 See [[WikiCreole:CheatSheet|Creole 1.0 Cheat Sheet]] for editing tips.
         </textarea>
@@ -283,7 +285,7 @@ See [[WikiCreole:CheatSheet|Creole 1.0 Cheat Sheet]] for editing tips.
 
   </div> <!--! end of #container -->
 
-  <script src="wikicreole.js"></script>
+  <script src="wikiforms.js"></script>
   <script>
     function $(id) {
       return document.getElementById(id);
@@ -293,7 +295,7 @@ See [[WikiCreole:CheatSheet|Creole 1.0 Cheat Sheet]] for editing tips.
       var input = $('source');
       var demo = $('generated');
 
-      var creole = new WikiCreole.Creole({
+      var creole = new WikiForms.Form({
         forIE: document.all,
         interwiki: {
           WikiCreole: 'http://www.wikicreole.org/wiki/',

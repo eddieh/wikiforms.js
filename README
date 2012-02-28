@@ -1,4 +1,4 @@
-= JavaScript Creole 1.0 Wiki Markup Parser
+= JavaScript WikCreole 1.0 + WikiForms Markup Parser
 
 Creole is a common wiki markup language to be used across different
 wikis. It's not replacing existing markup but instead enabling wiki
@@ -10,7 +10,7 @@ users to contribute more easily.
 // Assuming #input is a textarea and #output is a div.
 var input = document.getElementById('input');
 var output = document.getElementById('output');
-var creole = new WikiCreole.Creole({
+var creole = new WikiForms.Form({
   forIE: document.all,
   interwiki: {
     WikiCreole: 'http://www.wikicreole.org/wiki/',

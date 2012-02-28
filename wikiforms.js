@@ -1,5 +1,5 @@
 /*
- * JavaScript Creole 1.0 Wiki Markup Parser
+ * JavaScript WikCreole 1.0 + WikiForms Markup Parser
  * $Id: creole.js 14 2009-03-21 16:15:08Z ifomichev $
  *
  * Copyright (c) 2009 Ivan Fomichev
@@ -31,7 +31,7 @@
  * // Assuming #input is a textarea and #output is a div.
  * var input = document.getElementById('input');
  * var output = document.getElementById('output');
- * var creole = new WikiCreole.Creole({
+ * var creole = new WikiForms.Form({
  *   forIE: document.all,
  *   interwiki: {
  *     WikiCreole: 'http://www.wikicreole.org/wiki/',
@@ -43,11 +43,11 @@
  */
 
 
-if (!WikiCreole) {
-  var WikiCreole = {};
+if (!WikiForms) {
+  var WikiForms = {};
 }
 
-WikiCreole.Base = function(grammar, options) {
+WikiForms.Base = function(grammar, options) {
   if (!arguments.length) {
     return;
   }
@@ -57,13 +57,13 @@ WikiCreole.Base = function(grammar, options) {
   this.options = options;
 };
 
-WikiCreole.Base.prototype = {
+WikiForms.Base.prototype = {
   ruleConstructor: null,
   grammar: null,
   options: null,
 
   /**
-   * Parses Wiki Creole markup and inserts its corresponding HTML into
+   * Parses Wiki Creole + WikiForms markup and inserts its corresponding HTML into
    * a given dom node.
    *
    * @param Node node A dom node to insert the resulting HTML into
@@ -91,9 +91,9 @@ WikiCreole.Base.prototype = {
   }
 };
 
-WikiCreole.Base.prototype.constructor = WikiCreole.Base;
+WikiForms.Base.prototype.constructor = WikiForms.Base;
 
-WikiCreole.Base.Rule = function(params) {
+WikiForms.Base.Rule = function(params) {
   if (!arguments.length) {
     return;
   }
@@ -107,9 +107,9 @@ WikiCreole.Base.Rule = function(params) {
   }
 };
 
-WikiCreole.Base.prototype.ruleConstructor = WikiCreole.Base.Rule;
+WikiForms.Base.prototype.ruleConstructor = WikiForms.Base.Rule;
 
-WikiCreole.Base.Rule.prototype = {
+WikiForms.Base.Rule.prototype = {
   regex: null,
   capture: null,
   replaceRegex: null,
@@ -227,9 +227,9 @@ WikiCreole.Base.Rule.prototype = {
   }
 };
 
-WikiCreole.Base.Rule.prototype.constructor = WikiCreole.Base.Rule;
+WikiForms.Base.Rule.prototype.constructor = WikiForms.Base.Rule;
 
-WikiCreole.Creole = function(options) {
+WikiForms.Form = function(options) {
   var rx = {};
   rx.link = '[^\\]|~\\n]*(?:(?:\\](?!\\])|~.)[^\\]|~\\n]*)*';
   rx.linkText = '[^\\]~\\n]*(?:(?:\\](?!\\])|~.)[^\\]~\\n]*)*';
@@ -370,7 +370,51 @@ WikiCreole.Creole = function(options) {
             (options && options.defaultImageText ? options.defaultImageText : '')
         : r[2].replace(/~(.)/g, '$1');
         node.appendChild(img);
-      } },
+      }
+    },
+
+    // @name@
+    textfield: {
+      regex: /@(\w+)@/,
+      build: function(node, r, options) {
+        var input = document.createElement('input');
+        input.id = 'input_' + r[1];
+        input.name = r[1];
+        node.appendChild(input);
+      }
+    },
+
+    // @description|textarea(5,10)@
+    textarea: {
+      regex: /@(\w+)\|textarea\((\d+),(\d+)\)@/,
+      build: function(node, r, options) {
+        var area = document.createElement('textarea');
+        area.id = 'textarea_' + r[1];
+        area.name = r[1];
+        area.rows = r[2];
+        area.cols = r[3];
+        node.appendChild(area);
+      }
+    },
+
+    // @occupation|list(Scientist,Engineer,Philosopher)@
+    list: {
+      regex: /@(\w+)\|list\(([\w,]+)\)@/,
+      build: function(node, r, options) {
+        var select = document.createElement('select');
+        select.id = 'select_' + r[1];
+        select.name = r[1];
+        var options = r[2].split(',');
+        for (var optIdx in options) {
+          if (!options.hasOwnProperty(optIdx)) continue;
+          var opt = document.createElement('option');
+          opt.value = options[optIdx];
+          opt.innerText = options[optIdx];
+          select.appendChild(opt);
+        }
+        node.appendChild(select);
+      }
+    },
 
     namedUri: {
       regex: '\\[\\[(' + rx.uri + ')\\|(' + rx.linkText + ')\\]\\]',
@@ -520,13 +564,14 @@ WikiCreole.Creole = function(options) {
   g.root = {
     children: [
       g.h1, g.h2, g.h3, g.h4, g.h5, g.h6,
-      g.hr, g.ulist, g.olist, g.preBlock, g.table ],
+      g.hr, g.ulist, g.olist, g.preBlock, g.table,
+      g.textfield, g.textarea, g.list ],
     fallback: { children: [ g.paragraph ] }
   };
 
-  WikiCreole.Base.call(this, g, options);
+  WikiForms.Base.call(this, g, options);
 };
 
-WikiCreole.Creole.prototype = new WikiCreole.Base();
+WikiForms.Form.prototype = new WikiForms.Base();
 
-WikiCreole.Creole.prototype.constructor = WikiCreole.Creole;
+WikiForms.Form.prototype.constructor = WikiForms.Form;
