@@ -81,6 +81,20 @@
     div#generated {
       padding: 12px;
     }
+    form.wikiform {
+    }
+    form.wikiform ul { list-style:none }
+    form.wikiform ul li label {
+      float: left;
+      display: inline-block;
+      width: 150px;
+      text-align: left;
+      padding: 3px;
+      white-space: normal;
+    }
+    form.wikiform.example ul li label {
+      width: 42px;
+    }
   </style>
 
 </head>
@@ -253,24 +267,77 @@
               //**don't** format//
             </td>
           </tr>
+          <tr>
+            <td class="syntax">@name@</td>
+            <td class="arrow">→</td>
+            <td>
+              <form class="wikiform example"><!-- <ul> -->
+                <!-- <li> -->
+                <!--   <label for="example_name">Name</label> -->
+                  <input type="text" id="example_name" name="name" />
+              <!--   </li> -->
+              <!-- </ul> --></form>
+            </td>
+          </tr>
+          <tr>
+            <td class="syntax">@blurb|textarea(5,16)@</td>
+            <td class="arrow">→</td>
+            <td>
+              <form class="wikiform example"><!-- <ul> -->
+                <!-- <li> -->
+                <!--   <label for="example_blurb">Blurb</label> -->
+                  <textarea id="example_blurb" name="blurb" rows="5" cols="16"></textarea>
+              <!--   </li> -->
+              <!-- </ul> --></form>
+            </td>
+          </tr>
+          <tr>
+            <td class="syntax">@foo|list(S,N,L)@</td>
+            <td class="arrow">→</td>
+            <td>
+              <form class="wikiform example"><!-- <ul> -->
+                <!-- <li> -->
+                <!--   <label for="example_foo">Foo</label> -->
+                  <select id="example_foo" name="foo">
+                    <option value="S">S</option>
+                    <option value="N">N</option>
+                    <option value="L">L</option>
+                  </select>
+                <!-- </li> -->
+              <!-- </ul> --></form>
+            </td>
+          </tr>
         </tbody></table>
-        <b style="font-size: 70%;">
-          www.wikicreole.org
-        </b>
       </div>
 
       <div>
-        <textarea id="source" cols="80" rows="18">
-What you see is a **live** demonstration of [[WikiCreole:Creole1.0|Creole 1.0]] parser, written entirely in [[Wikipedia:JavaScript|JavaScript]]. Creole is a wiki markup language, intended to be a cross standard for various wiki markup dialects.
+<textarea id="source" cols="80" rows="18">
+= Create an Account
 
-@title@
+This is a **live** demonstration of wikiforms.js. What follows is an example account creation form.
+----
 
-@description|textarea(5,10)@
+First and last name:
+@first@
 
+@last@
+
+Desired login name:
+@login@
+
+Choose a password:
+@password@
+@again@
+
+Enter a description of yourself:
+@description|textarea(5,64)@
+
+What is your occupation?
 @occupation|list(Scientist,Engineer,Philosopher)@
 
-See [[WikiCreole:CheatSheet|Creole 1.0 Cheat Sheet]] for editing tips.
-        </textarea>
+== Terms of Service
+Please check the Account information you've entered above (feel free to change anything you like), and review the [[about:blank|Terms of Service]].
+</textarea>
         <div id="toolbar">
           <button id="build">Build</button>
         </div>
