@@ -25,6 +25,24 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
+/*
+ * How to use:
+ *
+ * // Assuming #input is a textarea and #output is a div.
+ * var input = document.getElementById('input');
+ * var output = document.getElementById('output');
+ * var creole = new Parse.Simple.Creole({
+ *   forIE: document.all,
+ *   interwiki: {
+ *     WikiCreole: 'http://www.wikicreole.org/wiki/',
+ *     Wikipedia: 'http://en.wikipedia.org/wiki/'
+ *   },
+ *   linkFormat: ''
+ * });
+ * creole.parse(output, input.value);
+ */
+
+
 if (!Parse) {
   var Parse = {};
 }
@@ -48,6 +66,14 @@ Parse.Simple.Base.prototype = {
   grammar: null,
   options: null,
 
+  /**
+   * Parses Wiki Creole markup and inserts its corresponding HTML into
+   * a given dom node.
+   *
+   * @param Node node A dom node to insert the resulting HTML into
+   * @param String data The markup to parse
+   * @param Hash options Options as key-value pairs
+   */
   parse: function(node, data, options) {
     if (options) {
       for (i in this.options) {
