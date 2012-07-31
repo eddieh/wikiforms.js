@@ -1,0 +1,57 @@
+/* Markup Help */
+div#markup-help {
+  font-size: 13px;
+}
+div#markup-help table {
+  border-bottom: 3px solid #BBB;
+  border-left: 3px solid #999;
+  border-right: 3px solid #BBB;
+  border-top: 3px solid #999;
+  margin-bottom: 0;
+}
+div#markup-help td {
+  border: 1px solid #999;
+  border-width: 1px 0;
+  font-size: 80%;
+  margin: 0;
+  padding: 0.2em;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+div#markup-help td.syntax, div#markup-help tr > :first-child {
+  padding-left: 4px;
+  font-family: monospace;
+}
+div#markup-help td.arrow {
+  color: #666;
+  padding: 0 1em;
+}
+#markup-help table {
+  border: double black;
+  border-collapse: collapse;
+}
+
+
+/* Form Styles */
+form.wikiform {
+}
+form.wikiform ul { list-style:none }
+form.wikiform ul li label {
+  float: left;
+  display: inline-block;
+  width: 150px;
+  text-align: left;
+  padding: 3px;
+  white-space: normal;
+}
+form.wikiform.example ul li label {
+  width: 42px;
+}
+
+
+/* Text Area */
+textarea#source {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  font-family: monospace;
+}
